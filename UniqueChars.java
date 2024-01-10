@@ -1,24 +1,39 @@
-/** String processing exercise 2. */
 public class UniqueChars {
-    public static void main(String[] args) {  
-        String str = args[0];
-        System.out.println(uniqueChars(str));
+    // declare variables
+    static String str1, str2;
+
+    public static void main(String[] args) {
+        str1 = args[0];
+        str2 = "";
+        uniqueChars();
+        System.out.println(str2);
     }
 
-    /**
-     * Returns a string which is identical to the original string, 
-     * except that all the duplicate characters are removed,
-     * unless they are space characters.
-     */
-    public static String uniqueChars(String s) {
-        String temp = " ";
-        for (int i = 0; i < s.length(); i++){
-           if (temp.indexOf(s.charAt(i)) == - 1){
-              temp = temp + s.charAt(i);
+    public static void uniqueChars() {
+        for (int i = 0; i < str1.length(); i++) {
+            int j = 0;
+            boolean flag = true;
+            if (i == 0) {
+                str2 += str1.charAt(i);
+            }
+            if (i > 0) {
+                if (str1.charAt(i) == ' ') {
+                    str2 += str1.charAt(i);
+                } else {
+                    // check if the character is already in the string
+                    while (j < i && j < str2.length()) {
+                        // if the character is already in the string, set flag to false
+                        if (str1.charAt(i) == str2.charAt(j) ) {
+                            flag = false;
+                        }
+                        j++;
+                    }
+                    // if the character is not in the string, add it to the string
+                    if (flag) {
+                        str2 += str1.charAt(i);
+                    }
+                }
+            }
         }
-     }
-
-   return temp;
-
-  }        
     }
+}
